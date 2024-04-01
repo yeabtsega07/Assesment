@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { hospitalsAPI } from "./slice/hospitalAPI";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import { useSelector } from "react-redux";
 
 export const store = configureStore({
   reducer: {
@@ -11,3 +12,6 @@ export const store = configureStore({
 });
 
 setupListeners(store.dispatch);
+export type RootStore = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export const useAppSelector = useSelector;

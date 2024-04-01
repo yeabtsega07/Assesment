@@ -1,9 +1,11 @@
 "use client"
 
 import Card from "@/components/card";
+import Footer from "@/components/footer";
 import Navbar from "@/components/navBar";
 import SearchBar from "@/components/searchBar";
 import { useFetchHospitalsQuery } from "@/redux/slice/hospitalAPI";
+import Link from "next/link";
 import React, { useState } from "react";
 
 
@@ -31,7 +33,8 @@ return (
         onChange={e => setSearchTerm(e.target.value)}
       />
         <div className="grid mx-36 grid-rows-3 gap-4 p-10">
-            {filteredHospitals.map((cardData) => (
+            {filteredHospitals.map((cardData, index) => (
+                <Link key={index} href={`/hospitals/${cardData._id}`}>
                 <Card
                     key={cardData._id}
                     title={cardData.institutionName}
@@ -42,8 +45,10 @@ return (
                     phoneNumbers={cardData.phoneNumbers}
                     emails={cardData.emails}
                 />
+                </Link>
             ))}
         </div>
+        <Footer/>
     </div>
 );
 };
